@@ -5,7 +5,6 @@ import { Route, Routes } from "react-router-dom";
 const App = () => {
   return (
     <div className=" container">
-      <Navbar />
       <Routes>
         <Route path="/" element={<Table />} />
         <Route path="/create" element={<CreateAccount />} />
