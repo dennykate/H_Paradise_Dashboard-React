@@ -6,14 +6,18 @@ import Navbar from "./Navbar";
 const CreateAccount = () => {
   const [create] = useCreateMutation();
   const [code, setCode] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const createHandler = async () => {
+    setLoading(true);
     const { data, error } = await create();
-
     if (data.success) {
       setCode(data.code);
-      successAlert("Code was generated successful");
+      navigator.clipboard.writeText(data.code).then(() => {
+        successAlert("Code was generated successful & Copied to clipboard");
+      });
     }
+    setLoading(false);
   };
 
   const copyHandler = () => {
@@ -29,7 +33,7 @@ const CreateAccount = () => {
       <Navbar />
       <div
         style={{ maxWidth: 500 }}
-        className=" px-3 py-5 m-auto rounded shadow w-50"
+        className=" px-3 py-5 m-auto rounded shadow w-md-50 w-100"
       >
         <h3 className=" text-center text-primary  mb-4">Create An Account</h3>
 
@@ -40,19 +44,22 @@ const CreateAccount = () => {
             type="text"
             className=" form-control "
           />
-         
-            <button
-              onClick={copyHandler}
-              className="btn btn-primary"
-              type="button"
-            >
-             <i className="bi bi-clipboard"></i>
-            </button>
-         
+
+          <button
+            onClick={copyHandler}
+            className="btn btn-primary"
+            type="button"
+          >
+            <i className="bi bi-clipboard"></i>
+          </button>
         </div>
 
-        <button onClick={createHandler} className=" btn btn-primary py-2 w-100 mt-3">
-          Generate
+        <button
+          disabled={loading}
+          onClick={createHandler}
+          className=" btn btn-primary py-2 w-100 mt-3"
+        >
+          {!loading ? "Generate" : "Loading..."}
         </button>
       </div>
     </div>

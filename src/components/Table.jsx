@@ -6,9 +6,7 @@ import Navbar from "./Navbar";
 
 const Table = () => {
   const [page, setPage] = useState(1);
-  // const { data, error, isLoading } = useGetAllQuery(page);
-  const data = [];
-  const isLoading = true;
+  const { data, error, isLoading } = useGetAllQuery(page);
   const [destroy] = useDestroyMutation();
 
   const copiedText = (code) => {
@@ -26,9 +24,9 @@ const Table = () => {
   };
 
   return (
-    <>
+    <div>
       <Navbar />
-      <div className="py-5">
+      <div className="py-5" style={{ width: "100%", overflowY: "auto" }}>
         <table className=" table table-striped table-hover table-bordered rounded-table">
           <thead className="bg-primary text-white">
             <tr className="">
@@ -51,7 +49,7 @@ const Table = () => {
             {data &&
               data?.data?.map((dt, index) => (
                 <tr key={index}>
-                  <td className="d-flex align-items-center justify-content-between">
+                  <td className="d-flex align-items-center justify-content-between ">
                     <h6>{dt.code}</h6>
                     <button
                       onClick={() => copiedText(dt.code)}
@@ -75,7 +73,7 @@ const Table = () => {
           </tbody>
         </table>
 
-        <div className="d-flex align-items-center justify-content-end">
+        <div className="d-flex align-items-center justify-content-md-end justify-content-start">
           <div className="btn-group" role="group" aria-label="Basic example">
             <button
               onClick={onPrevHandler}
@@ -99,7 +97,7 @@ const Table = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

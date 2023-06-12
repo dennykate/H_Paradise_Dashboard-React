@@ -1,12 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const { pathname } = useLocation();
+
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary bg-primary shadow rounded px-3 py-2 mt-3">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary bg-primary shadow rounded px-md-3 px-1 py-2 mt-3">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand">
-          <h1 className="text-white h2 m-0 font-monospace">Blue Box</h1>
+          <img
+            src="https://i.postimg.cc/Nfb6DFdV/icon.png"
+            alt="icon"
+            style={{ width: 40, height: 40, borderRadius: 5 }}
+          />
         </Link>
         <button
           className="navbar-toggler"
@@ -22,9 +28,15 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item me-3">
-              <Link to="/create" className="nav-link text-white">
-                Create Account
-              </Link>
+              {pathname != "/create" ? (
+                <Link to="/create" className="nav-link text-white">
+                  Create Account
+                </Link>
+              ) : (
+                <Link to="/" className="nav-link text-white">
+                  Dashboard
+                </Link>
+              )}
             </li>
 
             <li className="nav-item dropdown">
@@ -36,9 +48,9 @@ const Navbar = () => {
                 aria-expanded="false"
               >
                 <i className="bi bi-person-circle me-2 "></i>
-                Name
+                Admin
               </a>
-              <ul className="dropdown-menu shadow-sm">
+              {/* <ul className="dropdown-menu shadow-sm">
                 <li>
                   <a className="dropdown-item" href="#">
                     <div className="d-flex justify-content-between">
@@ -46,7 +58,7 @@ const Navbar = () => {
                     </div>
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </li>
           </ul>
         </div>
