@@ -1,8 +1,15 @@
+import Cookies from "js-cookie";
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    Cookies.remove("user");
+    navigate("/login");
+  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary bg-primary shadow rounded px-md-3 px-1 py-2 mt-3">
@@ -50,15 +57,19 @@ const Navbar = () => {
                 <i className="bi bi-person-circle me-2 "></i>
                 Admin
               </a>
-              {/* <ul className="dropdown-menu shadow-sm">
+              <ul className="dropdown-menu shadow-sm">
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <button
+                    onClick={logoutHandler}
+                    className="dropdown-item"
+                    href="#"
+                  >
                     <div className="d-flex justify-content-between">
                       Log Out <i className="bi bi-box-arrow-in-right"></i>
                     </div>
-                  </a>
+                  </button>
                 </li>
-              </ul> */}
+              </ul>
             </li>
           </ul>
         </div>
