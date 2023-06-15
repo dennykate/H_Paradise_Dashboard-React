@@ -21,7 +21,7 @@ const Login = () => {
       className=" w-100 d-flex justify-content-center align-items-center"
       style={{ height: "100vh" }}
     >
-      <form onSubmit={onSubmitHandler} style={{ width: 500 }}>
+      <div style={{ width: 500 }}>
         <div className="form-outline mb-4">
           <input
             value={email}
@@ -64,10 +64,13 @@ const Login = () => {
           </div>
         </div>
 
-        <button type="submit" className="btn btn-primary btn-block mb-4">
+        <button
+          onClick={onSubmitHandler}
+          className="btn btn-primary btn-block mb-4"
+        >
           Sign in
         </button>
-      </form>
+      </div>
     </div>
   );
 };
